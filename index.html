@@ -230,6 +230,110 @@
             font-size: 3rem;
         }
 
+        /* Dashboard Mockup */
+        .dashboard-mockup {
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 1.5rem;
+            overflow: hidden;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .dashboard-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .dashboard-header span {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid #e5e5e5;
+        }
+
+        .stat-card label {
+            font-size: 0.7rem;
+            color: #666;
+            display: block;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #3171ef;
+        }
+
+        .property-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .property-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 0.875rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .property-info h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .property-info p {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .property-status {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .property-status.active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .property-status.pending {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
         /* Pricing Section */
         .pricing-section {
             padding: 100px 7%;
@@ -560,6 +664,28 @@
                 font-size: 3rem;
             }
 
+            .dashboard-mockup {
+                padding: 1rem;
+            }
+
+            .dashboard-header h3 {
+                font-size: 1rem;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 0.5rem;
+            }
+
+            .property-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
             footer {
                 padding: 40px 5% 20px;
             }
@@ -571,10 +697,10 @@
     <nav>
         <div class="logo">PropMan</div>
         <ul class="nav-links">
-            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#how-it-works">Services</a></li>
             <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#testimonials">Why Us</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-auth">
             <a href="#login">Log In</a>
@@ -587,11 +713,53 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Let PropMan manage your rental</h1>
-            <p class="hero-subtitle">Our virtual management team will take care of everything for just $65 flat fee per month per unit, period.</p>
+            <p class="hero-subtitle">Our virtual property management team handles what traditional managers won't—flexible solutions for any property type.</p>
             <a href="#signup" class="hero-cta">Get Started</a>
         </div>
         <div class="hero-image">
-            <div class="feature-placeholder">🏢</div>
+            <div class="dashboard-mockup">
+                <div class="dashboard-header">
+                    <h3>My Properties</h3>
+                    <span>2 Active</span>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <label>Monthly Rent</label>
+                        <div class="value">$3,200</div>
+                    </div>
+                    <div class="stat-card">
+                        <label>Expenses</label>
+                        <div class="value">$840</div>
+                    </div>
+                    <div class="stat-card">
+                        <label>Net Income</label>
+                        <div class="value">$2,360</div>
+                    </div>
+                </div>
+                <div class="property-list">
+                    <div class="property-card">
+                        <div class="property-info">
+                            <h4>123 Oak Street</h4>
+                            <p>Atlanta, GA • 3 bed, 2 bath</p>
+                        </div>
+                        <span class="property-status active">Rented</span>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-info">
+                            <h4>456 Maple Ave</h4>
+                            <p>Austin, TX • 2 bed, 1 bath</p>
+                        </div>
+                        <span class="property-status active">Rented</span>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-info">
+                            <h4>789 Pine Lane</h4>
+                            <p>Denver, CO • 4 bed, 3 bath</p>
+                        </div>
+                        <span class="property-status pending">Available</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -599,31 +767,31 @@
     <section id="how-it-works" class="features">
         <div class="feature-block reverse">
             <div class="feature-content">
-                <h2>Finding quality tenants, made easy</h2>
-                <p>We handle the entire tenant placement process from professional listing creation to comprehensive screening and background checks.</p>
+                <h2>Financial tracking made simple</h2>
+                <p>Keep tabs on every dollar coming in and going out. Track rent payments, expenses, property taxes, and maintenance costs all in one place.</p>
                 <ul>
-                    <li>Professional photography and listing creation</li>
-                    <li>Multi-platform advertising and promotion</li>
-                    <li>Comprehensive tenant screening</li>
-                    <li>Credit and background checks</li>
-                    <li>Lease preparation and signing</li>
+                    <li>Rent payment tracking and reminders</li>
+                    <li>Expense categorization and logging</li>
+                    <li>Property tax tracking and reminders</li>
+                    <li>Maintenance cost documentation</li>
+                    <li>Monthly financial summaries</li>
                 </ul>
             </div>
             <div class="feature-image">
-                <div class="feature-placeholder">👥</div>
+                <div class="feature-placeholder">📊</div>
             </div>
         </div>
 
         <div class="feature-block">
             <div class="feature-content">
-                <h2>Maintenance requests handled instantly</h2>
-                <p>Our 24/7 maintenance coordination system ensures issues are resolved quickly with our network of trusted contractors.</p>
+                <h2>Maintenance coordination</h2>
+                <p>We coordinate maintenance requests and keep you in the loop. Whether it's scheduling repairs or tracking work orders, we've got you covered.</p>
                 <ul>
-                    <li>24/7 tenant maintenance request portal</li>
-                    <li>Vetted contractor network</li>
-                    <li>Real-time status updates</li>
-                    <li>Quality assurance checks</li>
-                    <li>Preventive maintenance scheduling</li>
+                    <li>Maintenance request management</li>
+                    <li>Contractor coordination</li>
+                    <li>Work order tracking</li>
+                    <li>Cost documentation</li>
+                    <li>Owner approval workflows</li>
                 </ul>
             </div>
             <div class="feature-image">
@@ -633,94 +801,94 @@
 
         <div class="feature-block reverse">
             <div class="feature-content">
-                <h2>Automated rent collection</h2>
-                <p>Never chase rent payments again. Our automated system ensures on-time payments and handles all the accounting.</p>
+                <h2>Beyond traditional management</h2>
+                <p>We handle the unique cases that traditional property managers won't. International properties, padsplit arrangements, vacation rentals—we're flexible enough to manage it all.</p>
                 <ul>
-                    <li>Automatic ACH rent collection</li>
-                    <li>Late payment reminders and enforcement</li>
-                    <li>Instant owner distributions</li>
-                    <li>Detailed financial reporting</li>
-                    <li>Tax-ready statements</li>
+                    <li>International property coordination</li>
+                    <li>Padsplit and co-living management</li>
+                    <li>Vacation rental support</li>
+                    <li>Custom management solutions</li>
+                    <li>Multi-platform listing management</li>
                 </ul>
             </div>
             <div class="feature-image">
-                <div class="feature-placeholder">💳</div>
+                <div class="feature-placeholder">🌍</div>
             </div>
         </div>
 
         <div class="feature-block">
             <div class="feature-content">
-                <h2>Complete financial transparency</h2>
-                <p>Track every dollar with real-time financial dashboards and comprehensive monthly reports.</p>
+                <h2>Property concierge services</h2>
+                <p>Think of us as your property assistant. We can handle any task you need—from coordinating inspections to managing vendor relationships.</p>
                 <ul>
-                    <li>Real-time financial dashboard</li>
-                    <li>Monthly income and expense reports</li>
-                    <li>Tax-ready documentation</li>
-                    <li>ROI tracking and analytics</li>
-                    <li>1099 preparation and filing</li>
+                    <li>Inspection coordination</li>
+                    <li>Vendor relationship management</li>
+                    <li>Document organization</li>
+                    <li>Owner request fulfillment</li>
+                    <li>Custom task management</li>
                 </ul>
             </div>
             <div class="feature-image">
-                <div class="feature-placeholder">📊</div>
+                <div class="feature-placeholder">🎯</div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
     <section id="pricing" class="pricing-section">
-        <h2>Simple, transparent pricing</h2>
-        <p class="subtitle">Professional property management with no hidden fees</p>
+        <h2>Flexible pricing for your needs</h2>
+        <p class="subtitle">Virtual property management that adapts to your situation</p>
         <div class="pricing-card">
-            <div class="pricing-amount">$65</div>
-            <p class="pricing-period">per month / per unit</p>
+            <div class="pricing-amount">Custom</div>
+            <p class="pricing-period">pricing based on your needs</p>
             <ul class="pricing-features">
-                <li>Full tenant placement and screening</li>
-                <li>24/7 maintenance coordination</li>
-                <li>Automated rent collection</li>
-                <li>Monthly financial reporting</li>
-                <li>Lease management and renewals</li>
-                <li>Legal compliance assistance</li>
-                <li>Dedicated account manager</li>
-                <li>Online owner and tenant portals</li>
+                <li>Rent payment tracking</li>
+                <li>Expense and tax documentation</li>
+                <li>Maintenance coordination</li>
+                <li>Monthly financial summaries</li>
+                <li>International property support</li>
+                <li>Padsplit management</li>
+                <li>Concierge services</li>
+                <li>Custom solutions for unique properties</li>
             </ul>
             <a href="#signup" class="hero-cta">Get Started</a>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <!-- Why Choose Us Section -->
     <section id="testimonials" class="testimonials">
         <div class="section-header">
-            <h2>Trusted by property owners nationwide</h2>
-            <p>See what our clients have to say about their experience</p>
+            <h2>Why choose PropMan?</h2>
+            <p>Built by property owners, for property owners</p>
         </div>
         <div class="testimonials-grid">
             <div class="testimonial-card">
-                <p class="testimonial-text">"PropMan has completely transformed how I manage my rental properties. The tenant quality has improved dramatically and I never have to worry about maintenance issues anymore."</p>
+                <p class="testimonial-text">We started managing our own rental properties and realized there was a gap in the market. Traditional property managers couldn't handle our international rentals or flexible arrangements.</p>
                 <div class="testimonial-author">
-                    <div class="author-avatar">SC</div>
+                    <div class="author-avatar">💡</div>
                     <div class="author-info">
-                        <h4>Sarah Chen</h4>
-                        <p>Property Owner, San Francisco</p>
+                        <h4>Real Experience</h4>
+                        <p>From Property Owners</p>
                     </div>
                 </div>
             </div>
             <div class="testimonial-card">
-                <p class="testimonial-text">"The financial reporting alone is worth the fee. I can see exactly where my money is going and track my ROI in real-time. Best property management decision I've made."</p>
+                <p class="testimonial-text">Virtual management means lower costs and more flexibility. We use technology to stay organized while maintaining the personal touch that property management requires.</p>
                 <div class="testimonial-author">
-                    <div class="author-avatar">JM</div>
+                    <div class="author-avatar">🌐</div>
                     <div class="author-info">
-                        <h4>James Martinez</h4>
-                        <p>Real Estate Investor, Austin</p>
+                        <h4>Virtual First</h4>
+                        <p>Technology-Enabled</p>
                     </div>
                 </div>
             </div>
             <div class="testimonial-card">
-                <p class="testimonial-text">"I was skeptical about virtual property management, but Marble proved me wrong. They're more responsive than my previous local manager and the technology is incredible."</p>
+                <p class="testimonial-text">Every property is unique. Whether you have a standard rental, a padsplit arrangement, or an international property, we adapt our services to fit your specific needs.</p>
                 <div class="testimonial-author">
-                    <div class="author-avatar">EK</div>
+                    <div class="author-avatar">🎯</div>
                     <div class="author-info">
-                        <h4>Emily Kim</h4>
-                        <p>Landlord, Seattle</p>
+                        <h4>Flexible Service</h4>
+                        <p>No One-Size-Fits-All</p>
                     </div>
                 </div>
             </div>
@@ -728,11 +896,11 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
+    <section id="contact" class="cta-section">
         <div class="cta-content">
-            <h2>Ready to simplify property management?</h2>
-            <p>Join thousands of property owners who trust PropMan with their investments</p>
-            <a href="#signup" class="btn-white">Get Started Today</a>
+            <h2>Ready to get started?</h2>
+            <p>Let's talk about how we can help manage your properties</p>
+            <a href="#signup" class="btn-white">Get Started</a>
         </div>
         <div class="cta-preview">
             <div class="interface-placeholder">📊</div>
