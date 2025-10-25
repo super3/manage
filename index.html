@@ -334,6 +334,192 @@
             color: #f57c00;
         }
 
+        /* Financial Tracking Mockup */
+        .financial-mockup {
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 1.5rem;
+            overflow: hidden;
+        }
+
+        .financial-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .financial-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .financial-summary {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .financial-stat {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 0.875rem;
+            border-radius: 8px;
+            border: 1px solid #e5e5e5;
+        }
+
+        .financial-stat label {
+            font-size: 0.7rem;
+            color: #666;
+            display: block;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .financial-stat .amount {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .financial-stat .amount.positive {
+            color: #2e7d32;
+        }
+
+        .financial-stat .amount.negative {
+            color: #d32f2f;
+        }
+
+        .transaction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+        }
+
+        .transaction-details {
+            flex: 1;
+        }
+
+        .transaction-details h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .transaction-details p {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .transaction-amount {
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+
+        .transaction-amount.income {
+            color: #2e7d32;
+        }
+
+        .transaction-amount.expense {
+            color: #d32f2f;
+        }
+
+        /* Maintenance Mockup */
+        .maintenance-mockup {
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 1.5rem;
+            overflow: hidden;
+        }
+
+        .maintenance-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .maintenance-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .request-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .request-item {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 0.875rem;
+        }
+
+        .request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.5rem;
+        }
+
+        .request-info h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .request-info p {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .request-status {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .request-status.completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .request-status.in-progress {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .request-status.pending {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .request-meta {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 0.5rem;
+        }
+
         /* Pricing Section */
         .pricing-section {
             padding: 100px 7%;
@@ -686,6 +872,31 @@
                 gap: 0.5rem;
             }
 
+            .financial-mockup,
+            .maintenance-mockup {
+                padding: 1rem;
+            }
+
+            .financial-header h3,
+            .maintenance-header h3 {
+                font-size: 1rem;
+            }
+
+            .financial-summary {
+                flex-direction: column;
+            }
+
+            .transaction-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .request-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
             footer {
                 padding: 40px 5% 20px;
             }
@@ -767,18 +978,54 @@
     <section id="how-it-works" class="features">
         <div class="feature-block reverse">
             <div class="feature-content">
-                <h2>Financial tracking made simple</h2>
+                <h2>Track your finances</h2>
                 <p>Keep tabs on every dollar coming in and going out. Track rent payments, expenses, property taxes, and maintenance costs all in one place.</p>
                 <ul>
-                    <li>Rent payment tracking and reminders</li>
-                    <li>Expense categorization and logging</li>
-                    <li>Property tax tracking and reminders</li>
-                    <li>Maintenance cost documentation</li>
-                    <li>Monthly financial summaries</li>
+                    <li>Rent payment tracking</li>
+                    <li>Expense categorization</li>
+                    <li>Property tax tracking</li>
+                    <li>Monthly summaries</li>
                 </ul>
             </div>
             <div class="feature-image">
-                <div class="feature-placeholder">📊</div>
+                <div class="financial-mockup">
+                    <div class="financial-header">
+                        <h3>October 2025</h3>
+                    </div>
+                    <div class="financial-summary">
+                        <div class="financial-stat">
+                            <label>Income</label>
+                            <div class="amount positive">+$3,200</div>
+                        </div>
+                        <div class="financial-stat">
+                            <label>Expenses</label>
+                            <div class="amount negative">-$840</div>
+                        </div>
+                    </div>
+                    <div class="transaction-list">
+                        <div class="transaction-item">
+                            <div class="transaction-details">
+                                <h4>Rent Payment</h4>
+                                <p>123 Oak Street • Oct 1</p>
+                            </div>
+                            <div class="transaction-amount income">+$1,800</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="transaction-details">
+                                <h4>Property Tax</h4>
+                                <p>123 Oak Street • Oct 15</p>
+                            </div>
+                            <div class="transaction-amount expense">-$450</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="transaction-details">
+                                <h4>HVAC Repair</h4>
+                                <p>456 Maple Ave • Oct 22</p>
+                            </div>
+                            <div class="transaction-amount expense">-$390</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -795,41 +1042,43 @@
                 </ul>
             </div>
             <div class="feature-image">
-                <div class="feature-placeholder">🔧</div>
-            </div>
-        </div>
-
-        <div class="feature-block reverse">
-            <div class="feature-content">
-                <h2>Beyond traditional management</h2>
-                <p>We handle the unique cases that traditional property managers won't. International properties, padsplit arrangements, vacation rentals—we're flexible enough to manage it all.</p>
-                <ul>
-                    <li>International property coordination</li>
-                    <li>Padsplit and co-living management</li>
-                    <li>Vacation rental support</li>
-                    <li>Custom management solutions</li>
-                    <li>Multi-platform listing management</li>
-                </ul>
-            </div>
-            <div class="feature-image">
-                <div class="feature-placeholder">🌍</div>
-            </div>
-        </div>
-
-        <div class="feature-block">
-            <div class="feature-content">
-                <h2>Property concierge services</h2>
-                <p>Think of us as your property assistant. We can handle any task you need—from coordinating inspections to managing vendor relationships.</p>
-                <ul>
-                    <li>Inspection coordination</li>
-                    <li>Vendor relationship management</li>
-                    <li>Document organization</li>
-                    <li>Owner request fulfillment</li>
-                    <li>Custom task management</li>
-                </ul>
-            </div>
-            <div class="feature-image">
-                <div class="feature-placeholder">🎯</div>
+                <div class="maintenance-mockup">
+                    <div class="maintenance-header">
+                        <h3>Recent Requests</h3>
+                    </div>
+                    <div class="request-list">
+                        <div class="request-item">
+                            <div class="request-header">
+                                <div class="request-info">
+                                    <h4>Leaking Kitchen Faucet</h4>
+                                    <p>123 Oak Street</p>
+                                </div>
+                                <span class="request-status completed">Completed</span>
+                            </div>
+                            <div class="request-meta">Submitted Oct 18 • Completed Oct 20</div>
+                        </div>
+                        <div class="request-item">
+                            <div class="request-header">
+                                <div class="request-info">
+                                    <h4>HVAC Not Cooling</h4>
+                                    <p>456 Maple Ave</p>
+                                </div>
+                                <span class="request-status in-progress">In Progress</span>
+                            </div>
+                            <div class="request-meta">Submitted Oct 22 • Technician scheduled Oct 25</div>
+                        </div>
+                        <div class="request-item">
+                            <div class="request-header">
+                                <div class="request-info">
+                                    <h4>Garage Door Repair</h4>
+                                    <p>123 Oak Street</p>
+                                </div>
+                                <span class="request-status pending">Pending</span>
+                            </div>
+                            <div class="request-meta">Submitted Oct 24 • Awaiting quotes</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
