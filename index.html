@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PropMan - Virtual Property Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: white;
+            padding: 1.2rem 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #3171ef;
+        }
+
+        .nav-auth {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-auth a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .btn-get-started {
+            background: #3171ef;
+            color: white;
+            padding: 0.65rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        .btn-get-started:hover {
+            background: #2560d9;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 7% 80px;
+            background: linear-gradient(180deg, #f8f9fa 0%, white 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #555;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            background: #3171ef;
+            color: white;
+            padding: 1.1rem 2.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .hero-cta:hover {
+            background: #2560d9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(49, 113, 239, 0.3);
+        }
+
+        .hero-image {
+            margin-top: 60px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 60px 7%;
+            background: white;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #3171ef;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 7%;
+            background: white;
+        }
+
+        .feature-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto 120px;
+            align-items: center;
+        }
+
+        .feature-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-block.reverse {
+            direction: rtl;
+        }
+
+        .feature-block.reverse > * {
+            direction: ltr;
+        }
+
+        .feature-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .feature-content p {
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-content li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        .feature-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feature-image {
+            width: 100%;
+        }
+
+        .feature-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #e8f0ff 0%, #f5f8ff 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 100px 7%;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .pricing-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-section .subtitle {
+            font-size: 1.15rem;
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .pricing-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            border: 2px solid #e5e5e5;
+        }
+
+        .pricing-amount {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #3171ef;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-period {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+
+        .pricing-features li {
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e5e5;
+            color: #1a1a1a;
+            font-size: 1rem;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 7%;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.15rem;
+            color: #666;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 2.5rem;
+            border-radius: 12px;
+        }
+
+        .testimonial-text {
+            color: #1a1a1a;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #3171ef;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 7%;
+            background: #3171ef;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .btn-white {
+            background: white;
+            color: #3171ef;
+            padding: 1.1rem 2.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .btn-white:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 7% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-section a:hover {
+            color: #3171ef;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #1a1a1a;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            nav {
+                padding: 1rem 5%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 120px 5% 60px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .stats {
+                padding: 40px 5%;
+            }
+
+            .features {
+                padding: 60px 5%;
+            }
+
+            .feature-block {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                margin-bottom: 80px;
+            }
+
+            .feature-block.reverse {
+                direction: ltr;
+            }
+
+            .feature-content h2 {
+                font-size: 2rem;
+            }
+
+            .pricing-section,
+            .testimonials,
+            .cta-section {
+                padding: 60px 5%;
+            }
+
+            .pricing-card {
+                padding: 30px;
+            }
+
+            .section-header h2,
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            footer {
+                padding: 40px 5% 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">PropMan</div>
+        <ul class="nav-links">
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+        </ul>
+        <div class="nav-auth">
+            <a href="#login">Log In</a>
+            <a href="#signup" class="btn-get-started">Get Started</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Let PropMan manage your rental</h1>
+        <p class="hero-subtitle">Full-service property management that saves you time and maximizes your investment returns. We handle everything from tenant placement to maintenance.</p>
+        <a href="#signup" class="hero-cta">Get Started</a>
+        <div class="hero-image">
+            <div class="feature-placeholder">🏢</div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat">
+                <h3>10,000+</h3>
+                <p>Properties Managed</p>
+            </div>
+            <div class="stat">
+                <h3>98%</h3>
+                <p>Tenant Satisfaction</p>
+            </div>
+            <div class="stat">
+                <h3>$50M+</h3>
+                <p>Rent Collected</p>
+            </div>
+            <div class="stat">
+                <h3>24/7</h3>
+                <p>Support Available</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="how-it-works" class="features">
+        <div class="feature-block">
+            <div class="feature-content">
+                <h2>Finding quality tenants, made easy</h2>
+                <p>We handle the entire tenant placement process from professional listing creation to comprehensive screening and background checks.</p>
+                <ul>
+                    <li>Professional photography and listing creation</li>
+                    <li>Multi-platform advertising and promotion</li>
+                    <li>Comprehensive tenant screening</li>
+                    <li>Credit and background checks</li>
+                    <li>Lease preparation and signing</li>
+                </ul>
+            </div>
+            <div class="feature-image">
+                <div class="feature-placeholder">👥</div>
+            </div>
+        </div>
+
+        <div class="feature-block reverse">
+            <div class="feature-content">
+                <h2>Maintenance requests handled instantly</h2>
+                <p>Our 24/7 maintenance coordination system ensures issues are resolved quickly with our network of trusted contractors.</p>
+                <ul>
+                    <li>24/7 tenant maintenance request portal</li>
+                    <li>Vetted contractor network</li>
+                    <li>Real-time status updates</li>
+                    <li>Quality assurance checks</li>
+                    <li>Preventive maintenance scheduling</li>
+                </ul>
+            </div>
+            <div class="feature-image">
+                <div class="feature-placeholder">🔧</div>
+            </div>
+        </div>
+
+        <div class="feature-block">
+            <div class="feature-content">
+                <h2>Automated rent collection</h2>
+                <p>Never chase rent payments again. Our automated system ensures on-time payments and handles all the accounting.</p>
+                <ul>
+                    <li>Automatic ACH rent collection</li>
+                    <li>Late payment reminders and enforcement</li>
+                    <li>Instant owner distributions</li>
+                    <li>Detailed financial reporting</li>
+                    <li>Tax-ready statements</li>
+                </ul>
+            </div>
+            <div class="feature-image">
+                <div class="feature-placeholder">💳</div>
+            </div>
+        </div>
+
+        <div class="feature-block reverse">
+            <div class="feature-content">
+                <h2>Complete financial transparency</h2>
+                <p>Track every dollar with real-time financial dashboards and comprehensive monthly reports.</p>
+                <ul>
+                    <li>Real-time financial dashboard</li>
+                    <li>Monthly income and expense reports</li>
+                    <li>Tax-ready documentation</li>
+                    <li>ROI tracking and analytics</li>
+                    <li>1099 preparation and filing</li>
+                </ul>
+            </div>
+            <div class="feature-image">
+                <div class="feature-placeholder">📊</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <h2>Simple, transparent pricing</h2>
+        <p class="subtitle">Professional property management with no hidden fees</p>
+        <div class="pricing-card">
+            <div class="pricing-amount">$65</div>
+            <p class="pricing-period">per month / per unit</p>
+            <ul class="pricing-features">
+                <li>Full tenant placement and screening</li>
+                <li>24/7 maintenance coordination</li>
+                <li>Automated rent collection</li>
+                <li>Monthly financial reporting</li>
+                <li>Lease management and renewals</li>
+                <li>Legal compliance assistance</li>
+                <li>Dedicated account manager</li>
+                <li>Online owner and tenant portals</li>
+            </ul>
+            <a href="#signup" class="hero-cta">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="section-header">
+            <h2>Trusted by property owners nationwide</h2>
+            <p>See what our clients have to say about their experience</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"PropMan has completely transformed how I manage my rental properties. The tenant quality has improved dramatically and I never have to worry about maintenance issues anymore."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SC</div>
+                    <div class="author-info">
+                        <h4>Sarah Chen</h4>
+                        <p>Property Owner, San Francisco</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The financial reporting alone is worth the fee. I can see exactly where my money is going and track my ROI in real-time. Best property management decision I've made."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JM</div>
+                    <div class="author-info">
+                        <h4>James Martinez</h4>
+                        <p>Real Estate Investor, Austin</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"I was skeptical about virtual property management, but Marble proved me wrong. They're more responsive than my previous local manager and the technology is incredible."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">EK</div>
+                    <div class="author-info">
+                        <h4>Emily Kim</h4>
+                        <p>Landlord, Seattle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to simplify property management?</h2>
+        <p>Join thousands of property owners who trust PropMan with their investments</p>
+        <a href="#signup" class="btn-white">Get Started Today</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>PropMan</h3>
+                <p style="color: #999; font-size: 0.95rem; line-height: 1.6;">Professional property management that works for you. Manage smarter, not harder.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#help">Help Center</a></li>
+                    <li><a href="#guides">Property Guides</a></li>
+                    <li><a href="#calculator">Rent Calculator</a></li>
+                    <li><a href="#api">API Docs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#security">Security</a></li>
+                    <li><a href="#compliance">Compliance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PropMan Property Management. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar shadow on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 20) {
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.08)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
