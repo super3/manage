@@ -72,7 +72,7 @@
 
         .btn-get-started {
             background: #3171ef;
-            color: white;
+            color: white !important;
             padding: 0.65rem 1.5rem;
             border-radius: 6px;
             text-decoration: none;
@@ -83,13 +83,23 @@
 
         .btn-get-started:hover {
             background: #2560d9;
+            color: white !important;
         }
 
         /* Hero Section */
         .hero {
-            padding: 140px 7% 80px;
-            background: linear-gradient(180deg, #f8f9fa 0%, white 100%);
-            text-align: center;
+            padding: 140px 7% 60px;
+            background: white;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            text-align: left;
         }
 
         .hero h1 {
@@ -98,18 +108,13 @@
             color: #1a1a1a;
             margin-bottom: 1.5rem;
             line-height: 1.15;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .hero-subtitle {
             font-size: 1.25rem;
             color: #555;
             margin-bottom: 2.5rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            line-height: 1.6;
         }
 
         .hero-cta {
@@ -131,50 +136,18 @@
         }
 
         .hero-image {
-            margin-top: 60px;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
+            width: 100%;
         }
 
         .hero-image img {
             width: 100%;
             border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: 60px 7%;
-            background: white;
-            border-top: 1px solid #e5e5e5;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .stat h3 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #3171ef;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat p {
-            color: #666;
-            font-size: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
         }
 
         /* Features Section */
         .features {
-            padding: 100px 7%;
+            padding: 60px 7% 100px;
             background: white;
         }
 
@@ -392,10 +365,15 @@
 
         /* CTA Section */
         .cta-section {
-            padding: 100px 7%;
+            padding: 100px 7% 80px;
             background: #3171ef;
             text-align: center;
             color: white;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto 60px;
         }
 
         .cta-section h2 {
@@ -425,6 +403,30 @@
         .btn-white:hover {
             background: #f0f0f0;
             transform: translateY(-2px);
+        }
+
+        .cta-preview {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .cta-preview img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .interface-placeholder {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #3171ef;
         }
 
         /* Footer */
@@ -501,6 +503,12 @@
 
             .hero {
                 padding: 120px 5% 60px;
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-content {
+                text-align: center;
             }
 
             .hero h1 {
@@ -509,10 +517,6 @@
 
             .hero-subtitle {
                 font-size: 1.1rem;
-            }
-
-            .stats {
-                padding: 40px 5%;
             }
 
             .features {
@@ -548,6 +552,14 @@
                 font-size: 2rem;
             }
 
+            .cta-content {
+                margin-bottom: 40px;
+            }
+
+            .interface-placeholder {
+                font-size: 3rem;
+            }
+
             footer {
                 padding: 40px 5% 20px;
             }
@@ -573,39 +585,19 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Let PropMan manage your rental</h1>
-        <p class="hero-subtitle">Full-service property management that saves you time and maximizes your investment returns. We handle everything from tenant placement to maintenance.</p>
-        <a href="#signup" class="hero-cta">Get Started</a>
+        <div class="hero-content">
+            <h1>Let PropMan manage your rental</h1>
+            <p class="hero-subtitle">Our virtual management team will take care of everything for just $65 flat fee per month per unit, period.</p>
+            <a href="#signup" class="hero-cta">Get Started</a>
+        </div>
         <div class="hero-image">
             <div class="feature-placeholder">🏢</div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat">
-                <h3>10,000+</h3>
-                <p>Properties Managed</p>
-            </div>
-            <div class="stat">
-                <h3>98%</h3>
-                <p>Tenant Satisfaction</p>
-            </div>
-            <div class="stat">
-                <h3>$50M+</h3>
-                <p>Rent Collected</p>
-            </div>
-            <div class="stat">
-                <h3>24/7</h3>
-                <p>Support Available</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Features Section -->
     <section id="how-it-works" class="features">
-        <div class="feature-block">
+        <div class="feature-block reverse">
             <div class="feature-content">
                 <h2>Finding quality tenants, made easy</h2>
                 <p>We handle the entire tenant placement process from professional listing creation to comprehensive screening and background checks.</p>
@@ -622,7 +614,7 @@
             </div>
         </div>
 
-        <div class="feature-block reverse">
+        <div class="feature-block">
             <div class="feature-content">
                 <h2>Maintenance requests handled instantly</h2>
                 <p>Our 24/7 maintenance coordination system ensures issues are resolved quickly with our network of trusted contractors.</p>
@@ -639,7 +631,7 @@
             </div>
         </div>
 
-        <div class="feature-block">
+        <div class="feature-block reverse">
             <div class="feature-content">
                 <h2>Automated rent collection</h2>
                 <p>Never chase rent payments again. Our automated system ensures on-time payments and handles all the accounting.</p>
@@ -656,7 +648,7 @@
             </div>
         </div>
 
-        <div class="feature-block reverse">
+        <div class="feature-block">
             <div class="feature-content">
                 <h2>Complete financial transparency</h2>
                 <p>Track every dollar with real-time financial dashboards and comprehensive monthly reports.</p>
@@ -737,9 +729,14 @@
 
     <!-- CTA Section -->
     <section class="cta-section">
-        <h2>Ready to simplify property management?</h2>
-        <p>Join thousands of property owners who trust PropMan with their investments</p>
-        <a href="#signup" class="btn-white">Get Started Today</a>
+        <div class="cta-content">
+            <h2>Ready to simplify property management?</h2>
+            <p>Join thousands of property owners who trust PropMan with their investments</p>
+            <a href="#signup" class="btn-white">Get Started Today</a>
+        </div>
+        <div class="cta-preview">
+            <div class="interface-placeholder">📊</div>
+        </div>
     </section>
 
     <!-- Footer -->
