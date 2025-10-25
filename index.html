@@ -522,60 +522,83 @@
 
         /* Pricing Section */
         .pricing-section {
-            padding: 100px 7%;
+            padding: 60px 7%;
             background: #f8f9fa;
-            text-align: center;
         }
 
         .pricing-section h2 {
             font-size: 2.5rem;
             font-weight: 700;
             color: #1a1a1a;
-            margin-bottom: 1rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
         }
 
-        .pricing-section .subtitle {
-            font-size: 1.15rem;
-            color: #666;
-            margin-bottom: 50px;
-        }
-
-        .pricing-card {
-            max-width: 500px;
+        .pricing-content {
+            max-width: 1000px;
             margin: 0 auto;
             background: white;
-            padding: 50px;
             border-radius: 12px;
-            border: 2px solid #e5e5e5;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .pricing-left {
+            border-right: 1px solid #e5e5e5;
+            padding-right: 2.5rem;
+        }
+
+        .pricing-tier {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .pricing-amount {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             color: #3171ef;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
 
         .pricing-period {
             color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-right {
+            display: flex;
+            flex-direction: column;
         }
 
         .pricing-features {
-            text-align: left;
-            margin-bottom: 2.5rem;
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem 1.5rem;
+            margin-bottom: 0;
         }
 
         .pricing-features li {
-            padding: 1rem 0;
-            border-bottom: 1px solid #e5e5e5;
             color: #1a1a1a;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 1.5rem;
         }
 
-        .pricing-features li:last-child {
-            border-bottom: none;
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2e7d32;
+            font-weight: bold;
         }
 
         /* Testimonials */
@@ -655,7 +678,7 @@
 
         /* CTA Section */
         .cta-section {
-            padding: 100px 7% 80px;
+            padding: 60px 7%;
             background: #3171ef;
             text-align: center;
             color: white;
@@ -663,29 +686,29 @@
 
         .cta-content {
             max-width: 700px;
-            margin: 0 auto 60px;
+            margin: 0 auto;
         }
 
         .cta-section h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
             opacity: 0.95;
         }
 
         .btn-white {
             background: white;
             color: #3171ef;
-            padding: 1.1rem 2.5rem;
+            padding: 0.9rem 2rem;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: 1rem;
             display: inline-block;
             transition: all 0.2s;
         }
@@ -696,14 +719,7 @@
         }
 
         .cta-preview {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .cta-preview img {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: none;
         }
 
         .interface-placeholder {
@@ -723,48 +739,39 @@
         footer {
             background: #1a1a1a;
             color: white;
-            padding: 60px 7% 30px;
+            padding: 30px 7%;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
+        .footer-content {
             max-width: 1200px;
-            margin: 0 auto 3rem;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
         }
 
-        .footer-section h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+        .footer-text {
+            color: #999;
+            font-size: 0.85rem;
         }
 
-        .footer-section ul {
-            list-style: none;
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
-        .footer-section li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-section a {
+        .footer-links a {
             color: #999;
             text-decoration: none;
             transition: color 0.2s;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
-        .footer-section a:hover {
+        .footer-links a:hover {
             color: #3171ef;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #333;
-            color: #666;
-            font-size: 0.9rem;
         }
 
         /* Mobile Menu */
@@ -830,24 +837,45 @@
             .pricing-section,
             .testimonials,
             .cta-section {
-                padding: 60px 5%;
+                padding: 40px 5%;
             }
 
-            .pricing-card {
-                padding: 30px;
+            .pricing-section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
             }
 
-            .section-header h2,
-            .cta-section h2 {
+            .pricing-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .pricing-left {
+                border-right: none;
+                border-bottom: 1px solid #e5e5e5;
+                padding-right: 0;
+                padding-bottom: 2rem;
+            }
+
+            .pricing-amount {
+                font-size: 2.5rem;
+            }
+
+            .pricing-features {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
                 font-size: 2rem;
             }
 
-            .cta-content {
-                margin-bottom: 40px;
+            .cta-section h2 {
+                font-size: 1.75rem;
             }
 
-            .interface-placeholder {
-                font-size: 3rem;
+            .cta-section p {
+                font-size: 1rem;
             }
 
             .dashboard-mockup {
@@ -898,7 +926,17 @@
             }
 
             footer {
-                padding: 40px 5% 20px;
+                padding: 25px 5%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .footer-links {
+                gap: 1.5rem;
             }
         }
     </style>
@@ -910,7 +948,6 @@
         <ul class="nav-links">
             <li><a href="#how-it-works">Services</a></li>
             <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#testimonials">Why Us</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-auth">
@@ -924,7 +961,7 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Let PropMan manage your rental</h1>
-            <p class="hero-subtitle">Our virtual property management team handles what traditional managers won't—flexible solutions for any property type.</p>
+            <p class="hero-subtitle">Our virtual property management team handles what traditional managers won't for just $25/month per property.</p>
             <a href="#signup" class="hero-cta">Get Started</a>
         </div>
         <div class="hero-image">
@@ -1085,61 +1122,23 @@
 
     <!-- Pricing Section -->
     <section id="pricing" class="pricing-section">
-        <h2>Flexible pricing for your needs</h2>
-        <p class="subtitle">Virtual property management that adapts to your situation</p>
-        <div class="pricing-card">
-            <div class="pricing-amount">Custom</div>
-            <p class="pricing-period">pricing based on your needs</p>
-            <ul class="pricing-features">
-                <li>Rent payment tracking</li>
-                <li>Expense and tax documentation</li>
-                <li>Maintenance coordination</li>
-                <li>Monthly financial summaries</li>
-                <li>International property support</li>
-                <li>Padsplit management</li>
-                <li>Concierge services</li>
-                <li>Custom solutions for unique properties</li>
-            </ul>
-            <a href="#signup" class="hero-cta">Get Started</a>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section id="testimonials" class="testimonials">
-        <div class="section-header">
-            <h2>Why choose PropMan?</h2>
-            <p>Built by property owners, for property owners</p>
-        </div>
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <p class="testimonial-text">We started managing our own rental properties and realized there was a gap in the market. Traditional property managers couldn't handle our international rentals or flexible arrangements.</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">💡</div>
-                    <div class="author-info">
-                        <h4>Real Experience</h4>
-                        <p>From Property Owners</p>
-                    </div>
-                </div>
+        <h2>Simple pricing for everyone</h2>
+        <div class="pricing-content">
+            <div class="pricing-left">
+                <div class="pricing-tier">Virtual Management</div>
+                <div class="pricing-amount">$25</div>
+                <p class="pricing-period">per property / month</p>
+                <a href="#signup" class="hero-cta">Get Started</a>
             </div>
-            <div class="testimonial-card">
-                <p class="testimonial-text">Virtual management means lower costs and more flexibility. We use technology to stay organized while maintaining the personal touch that property management requires.</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">🌐</div>
-                    <div class="author-info">
-                        <h4>Virtual First</h4>
-                        <p>Technology-Enabled</p>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <p class="testimonial-text">Every property is unique. Whether you have a standard rental, a padsplit arrangement, or an international property, we adapt our services to fit your specific needs.</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">🎯</div>
-                    <div class="author-info">
-                        <h4>Flexible Service</h4>
-                        <p>No One-Size-Fits-All</p>
-                    </div>
-                </div>
+            <div class="pricing-right">
+                <ul class="pricing-features">
+                    <li>Financial tracking</li>
+                    <li>Maintenance coordination</li>
+                    <li>Monthly summaries</li>
+                    <li>Flexible solutions</li>
+                    <li>No long-term contracts</li>
+                    <li>Cancel anytime</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -1158,50 +1157,14 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-grid">
-            <div class="footer-section">
-                <h3>PropMan</h3>
-                <p style="color: #999; font-size: 0.95rem; line-height: 1.6;">Professional property management that works for you. Manage smarter, not harder.</p>
+        <div class="footer-content">
+            <div class="footer-text">&copy; 2025 PropMan. All rights reserved.</div>
+            <div class="footer-links">
+                <a href="#contact">Contact</a>
+                <a href="#signup">Get Started</a>
+                <a href="#privacy">Privacy</a>
+                <a href="#terms">Terms</a>
             </div>
-            <div class="footer-section">
-                <h3>Product</h3>
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#careers">Careers</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="#help">Help Center</a></li>
-                    <li><a href="#guides">Property Guides</a></li>
-                    <li><a href="#calculator">Rent Calculator</a></li>
-                    <li><a href="#api">API Docs</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#terms">Terms of Service</a></li>
-                    <li><a href="#security">Security</a></li>
-                    <li><a href="#compliance">Compliance</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 PropMan Property Management. All rights reserved.</p>
         </div>
     </footer>
 
