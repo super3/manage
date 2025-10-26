@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - PropBa</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔑</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -148,10 +149,36 @@
             line-height: 1.6;
         }
 
+        .add-property-form {
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .address-input {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Inter', Arial, sans-serif;
+            transition: border-color 0.2s;
+        }
+
+        .address-input:focus {
+            outline: none;
+            border-color: #3171ef;
+        }
+
+        .address-input::placeholder {
+            color: #999;
+        }
+
         .btn-primary {
             background: #3171ef;
             color: white;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
@@ -160,6 +187,7 @@
             transition: all 0.2s;
             border: none;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .btn-primary:hover {
@@ -247,6 +275,10 @@
                 font-size: 1rem;
             }
 
+            .add-property-form {
+                flex-direction: column;
+            }
+
             .features-grid {
                 grid-template-columns: 1fr;
             }
@@ -279,8 +311,18 @@
         <div class="empty-state">
             <div class="empty-state-icon">🏠</div>
             <h2>Add your first property</h2>
-            <p>Start tracking your rental finances and managing maintenance by adding your first property. It only takes a minute to get started.</p>
-            <button class="btn-primary" onclick="alert('Add property modal would open here')">Add Property</button>
+            <p>Start tracking your rental finances and managing maintenance by adding your first property.</p>
+
+            <form class="add-property-form" onsubmit="event.preventDefault(); alert('Property added: ' + document.getElementById('address').value);">
+                <input
+                    type="text"
+                    id="address"
+                    placeholder="Enter property address"
+                    class="address-input"
+                    required
+                />
+                <button type="submit" class="btn-primary">Add Property</button>
+            </form>
 
             <div class="features-preview">
                 <h3>What you can do with PropBa:</h3>
