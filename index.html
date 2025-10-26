@@ -21,15 +21,14 @@
 
         /* Navigation */
         nav {
-            position: fixed;
-            width: 100%;
             background: white;
-            padding: 1.2rem 7%;
+            padding: 0 7%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
             border-bottom: 1px solid #e5e5e5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            height: 72px;
         }
 
         .logo {
@@ -88,7 +87,7 @@
 
         /* Hero Section */
         .hero {
-            padding: 140px 7% 60px;
+            padding: 80px 7% 60px;
             background: white;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -787,7 +786,7 @@
         /* Responsive */
         @media (max-width: 968px) {
             nav {
-                padding: 1rem 5%;
+                padding: 0 5%;
             }
 
             .nav-links {
@@ -799,7 +798,7 @@
             }
 
             .hero {
-                padding: 120px 5% 60px;
+                padding: 60px 5%;
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
@@ -948,10 +947,9 @@
         <ul class="nav-links">
             <li><a href="#how-it-works">Services</a></li>
             <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-auth">
-            <a href="#login">Log In</a>
+            <a href="dashboard.html">Log In</a>
             <a href="#signup" class="btn-get-started">Get Started</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
@@ -1163,8 +1161,7 @@
         <div class="footer-content">
             <div class="footer-text">&copy; 2025 PropBa. All rights reserved.</div>
             <div class="footer-links">
-                <a href="#contact">Contact</a>
-                <a href="#signup">Get Started</a>
+                <a href="#help">Help</a>
                 <a href="#privacy">Privacy</a>
                 <a href="#terms">Terms</a>
             </div>
@@ -1184,16 +1181,6 @@
                     });
                 }
             });
-        });
-
-        // Navbar shadow on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 20) {
-                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.08)';
-            } else {
-                nav.style.boxShadow = 'none';
-            }
         });
     </script>
 </body>
