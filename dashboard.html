@@ -111,64 +111,111 @@
             font-size: 1rem;
         }
 
-        /* Empty State */
-        .empty-state {
+        /* Dashboard Mockup - Getting Started State */
+        .dashboard-mockup {
             background: white;
             border-radius: 12px;
-            padding: 4rem 2rem;
-            text-align: center;
-            border: 2px dashed #e5e5e5;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            margin-bottom: 2rem;
         }
 
-        .empty-state-icon {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 2rem;
-            background: #f0f4ff;
-            border-radius: 50%;
+        .mockup-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e5e5e5;
         }
 
-        .empty-state h2 {
+        .mockup-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .mockup-header span {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #fafbfc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #e5e5e5;
+            opacity: 0.5;
+        }
+
+        .stat-card label {
+            font-size: 0.75rem;
+            color: #999;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #999;
+        }
+
+        .empty-properties {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f8f9ff 100%);
+            border-radius: 12px;
+            padding: 3.5rem 3rem;
+            text-align: center;
+            border: 2px solid #e0e7ff;
+        }
+
+        .empty-properties h3 {
             font-size: 1.75rem;
             font-weight: 700;
             color: #1a1a1a;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
-        .empty-state p {
-            font-size: 1.05rem;
-            color: #666;
+        .empty-properties p {
+            font-size: 1.1rem;
+            color: #555;
             margin-bottom: 2rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
             line-height: 1.6;
         }
 
         .add-property-form {
-            max-width: 500px;
-            margin: 0 auto 2rem;
+            max-width: 550px;
+            margin: 0 auto;
             display: flex;
             gap: 0.75rem;
         }
 
         .address-input {
             flex: 1;
-            padding: 1rem 1.25rem;
-            border: 2px solid #e5e5e5;
-            border-radius: 6px;
-            font-size: 1rem;
+            padding: 1.15rem 1.5rem;
+            border: 2px solid #d1d9ff;
+            border-radius: 8px;
+            font-size: 1.05rem;
             font-family: 'Inter', Arial, sans-serif;
-            transition: border-color 0.2s;
+            transition: all 0.2s;
+            background: white;
+            color: #1a1a1a;
         }
 
         .address-input:focus {
             outline: none;
+            background: white;
             border-color: #3171ef;
+            box-shadow: 0 0 0 4px rgba(49, 113, 239, 0.15);
         }
 
         .address-input::placeholder {
@@ -178,11 +225,11 @@
         .btn-primary {
             background: #3171ef;
             color: white;
-            padding: 1rem 2rem;
-            border-radius: 6px;
+            padding: 1.15rem 2.5rem;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
+            font-weight: 700;
+            font-size: 1.05rem;
             display: inline-block;
             transition: all 0.2s;
             border: none;
@@ -193,54 +240,7 @@
         .btn-primary:hover {
             background: #2560d9;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(49, 113, 239, 0.3);
-        }
-
-        .features-preview {
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid #e5e5e5;
-        }
-
-        .features-preview h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            text-align: left;
-        }
-
-        .feature-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .feature-text h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 0.25rem;
-        }
-
-        .feature-text p {
-            font-size: 0.85rem;
-            color: #666;
-            line-height: 1.5;
+            box-shadow: 0 10px 30px rgba(49, 113, 239, 0.35);
         }
 
         /* Responsive */
@@ -257,30 +257,48 @@
                 display: none;
             }
 
-            .empty-state {
-                padding: 3rem 1.5rem;
+            .dashboard-mockup {
+                padding: 1.5rem;
             }
 
-            .empty-state-icon {
-                width: 100px;
-                height: 100px;
-                font-size: 3rem;
+            .mockup-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
             }
 
-            .empty-state h2 {
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .empty-properties {
+                padding: 2.5rem 2rem;
+            }
+
+            .empty-properties h3 {
                 font-size: 1.5rem;
             }
 
-            .empty-state p {
+            .empty-properties p {
                 font-size: 1rem;
+            }
+
+            .address-input {
+                font-size: 1rem;
+                padding: 1rem 1.25rem;
+            }
+
+            .btn-primary {
+                font-size: 1rem;
+                padding: 1rem 2rem;
             }
 
             .add-property-form {
                 flex-direction: column;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -303,52 +321,41 @@
 
     <!-- Main Content -->
     <div class="container">
-        <div class="page-header">
-            <h1>My Properties</h1>
-            <p>Manage your rental properties in one place</p>
-        </div>
+        <div class="dashboard-mockup">
+            <div class="mockup-header">
+                <h2>My Properties</h2>
+                <span>0 Properties</span>
+            </div>
 
-        <div class="empty-state">
-            <div class="empty-state-icon">🏠</div>
-            <h2>Add your first property</h2>
-            <p>Start tracking your rental finances and managing maintenance by adding your first property.</p>
-
-            <form class="add-property-form" onsubmit="event.preventDefault(); alert('Property added: ' + document.getElementById('address').value);">
-                <input
-                    type="text"
-                    id="address"
-                    placeholder="Enter property address"
-                    class="address-input"
-                    required
-                />
-                <button type="submit" class="btn-primary">Add Property</button>
-            </form>
-
-            <div class="features-preview">
-                <h3>What you can do with PropBa:</h3>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">💰</div>
-                        <div class="feature-text">
-                            <h4>Track Finances</h4>
-                            <p>Monitor rent, expenses, and taxes</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🔧</div>
-                        <div class="feature-text">
-                            <h4>Manage Maintenance</h4>
-                            <p>Coordinate repairs and contractors</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📊</div>
-                        <div class="feature-text">
-                            <h4>View Reports</h4>
-                            <p>Monthly summaries and insights</p>
-                        </div>
-                    </div>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <label>Monthly Rent</label>
+                    <div class="value">$0</div>
                 </div>
+                <div class="stat-card">
+                    <label>Expenses</label>
+                    <div class="value">$0</div>
+                </div>
+                <div class="stat-card">
+                    <label>Net Income</label>
+                    <div class="value">$0</div>
+                </div>
+            </div>
+
+            <div class="empty-properties">
+                <h3>🏠 Add your first property</h3>
+                <p>Start tracking rent, expenses, and maintenance for your rental properties</p>
+
+                <form class="add-property-form" onsubmit="event.preventDefault(); alert('Property added: ' + document.getElementById('address').value);">
+                    <input
+                        type="text"
+                        id="address"
+                        placeholder="Enter property address"
+                        class="address-input"
+                        required
+                    />
+                    <button type="submit" class="btn-primary">Add Property</button>
+                </form>
             </div>
         </div>
     </div>
