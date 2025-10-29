@@ -94,6 +94,33 @@
             font-size: 0.9rem;
         }
 
+        /* Google Maps PlaceAutocompleteElement Styling */
+        gmp-place-autocomplete {
+            width: 100%;
+            color-scheme: light;
+        }
+
+        gmp-place-autocomplete input {
+            border: 2px solid #d1d9ff !important;
+            border-radius: 8px !important;
+            font-family: 'Inter', Arial, sans-serif !important;
+            font-size: 1.05rem !important;
+            color: #1a1a1a !important;
+            padding: 1.15rem 1.5rem !important;
+            background: white !important;
+            transition: all 0.2s !important;
+        }
+
+        gmp-place-autocomplete input::placeholder {
+            color: #999 !important;
+        }
+
+        gmp-place-autocomplete input:focus {
+            outline: none !important;
+            border-color: #3171ef !important;
+            box-shadow: 0 0 0 4px rgba(49, 113, 239, 0.15) !important;
+        }
+
         /* Main Content */
         .container {
             max-width: 1200px;
@@ -184,6 +211,10 @@
             border: 2px solid #e0e7ff;
         }
 
+        .empty-properties.hidden {
+            display: none;
+        }
+
         .empty-properties h3 {
             font-size: 1.5rem;
             font-weight: 600;
@@ -196,6 +227,79 @@
             color: #555;
             margin-bottom: 2rem;
             line-height: 1.6;
+        }
+
+        .properties-list {
+            display: none;
+        }
+
+        .properties-list.active {
+            display: block;
+        }
+
+        .property-card {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+
+        .property-card:hover {
+            border-color: #3171ef;
+            box-shadow: 0 4px 12px rgba(49, 113, 239, 0.1);
+        }
+
+        .property-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .property-address {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .property-details {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .property-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-view {
+            background: #f0f4ff;
+            color: #3171ef;
+        }
+
+        .btn-view:hover {
+            background: #e0e7ff;
+        }
+
+        .btn-delete {
+            background: #fff0f0;
+            color: #ef3131;
+        }
+
+        .btn-delete:hover {
+            background: #ffe0e0;
         }
 
         .add-property-form {
@@ -308,6 +412,7 @@
             }
         }
     </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxdYMdPwYKYGtjb5Bw8QhEbk6gKZkG0vM&libraries=places&loading=async&callback=initAutocomplete" async defer></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -344,22 +449,242 @@
                 </div>
             </div>
 
-            <div class="empty-properties">
-                <h3>🏠 Add your first property</h3>
-                <p>Start tracking rent, expenses, and maintenance for your rental properties</p>
+            <div class="properties-list" id="properties-list">
+                <!-- Properties will be added here dynamically -->
+            </div>
 
-                <form class="add-property-form" onsubmit="event.preventDefault(); alert('Property added: ' + document.getElementById('address').value);">
+            <div class="empty-properties" id="empty-state">
+                <h3>🏠 Add your first property</h3>
+                <p>Start tracking rent, expenses, and maintenance for your rental properties.</p>
+
+                <form class="add-property-form" id="add-property-form">
                     <input
                         type="text"
                         id="address"
                         placeholder="Enter property address"
                         class="address-input"
-                        required
                     />
                     <button type="submit" class="btn-primary">Add Property</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        let autocompleteWidget;
+        let selectedPlace = null;
+
+        // Initialize autocomplete when Google Maps API loads
+        async function initAutocomplete() {
+            try {
+                const { PlaceAutocompleteElement } = await google.maps.importLibrary("places");
+
+                const input = document.getElementById('address');
+
+                // Create the new PlaceAutocompleteElement
+                autocompleteWidget = new PlaceAutocompleteElement({
+                    componentRestrictions: { country: [] },  // Empty = all countries, or specify like ['us', 'ca']
+                });
+
+                // Replace the input with autocomplete widget
+                input.parentNode.insertBefore(autocompleteWidget, input);
+                input.style.display = 'none';
+
+                // Style the autocomplete widget container
+                autocompleteWidget.style.flex = '1';
+
+                // Listen for place selection
+                autocompleteWidget.addEventListener('gmp-select', async ({ placePrediction }) => {
+                    if (!placePrediction) {
+                        return;
+                    }
+
+                    // Convert prediction to place
+                    const place = placePrediction.toPlace();
+
+                    // Fetch full place details
+                    await place.fetchFields({
+                        fields: ['addressComponents', 'formattedAddress', 'location']
+                    });
+
+                    // Store the selected place data
+                    selectedPlace = {
+                        formattedAddress: place.formattedAddress,
+                        addressComponents: place.addressComponents,
+                        location: {
+                            lat: place.location.lat(),
+                            lng: place.location.lng()
+                        }
+                    };
+
+                    // Extract specific address components for future use
+                    const components = {};
+                    if (place.addressComponents) {
+                        place.addressComponents.forEach(component => {
+                            const type = component.types[0];
+                            components[type] = component.longText;
+                        });
+                    }
+
+                    selectedPlace.parsedAddress = {
+                        streetNumber: components.street_number || '',
+                        street: components.route || '',
+                        city: components.locality || components.sublocality || '',
+                        state: components.administrative_area_level_1 || '',
+                        zipCode: components.postal_code || '',
+                        country: components.country || ''
+                    };
+
+                    // Update hidden input for form submission
+                    input.value = place.formattedAddress;
+                });
+
+            } catch (error) {
+                console.error('Error initializing Google Maps Autocomplete:', error);
+                // Fallback: form will still work with manual address entry
+            }
+        }
+
+        // Properties storage
+        let properties = [];
+
+        // Update property count
+        function updatePropertyCount() {
+            const countElement = document.querySelector('.mockup-header span');
+            const count = properties.length;
+            countElement.textContent = count === 1 ? '1 Property' : `${count} Properties`;
+        }
+
+        // Toggle between empty state and properties list
+        function toggleEmptyState() {
+            const emptyState = document.getElementById('empty-state');
+            const propertiesList = document.getElementById('properties-list');
+
+            if (properties.length === 0) {
+                emptyState.classList.remove('hidden');
+                propertiesList.classList.remove('active');
+            } else {
+                emptyState.classList.add('hidden');
+                propertiesList.classList.add('active');
+            }
+        }
+
+        // Create property card HTML
+        function createPropertyCard(property, index) {
+            const card = document.createElement('div');
+            card.className = 'property-card';
+            card.innerHTML = `
+                <div class="property-header">
+                    <div>
+                        <div class="property-address">${property.address}</div>
+                        <div class="property-details">
+                            ${property.city ? property.city + ', ' : ''}${property.state || ''}
+                        </div>
+                    </div>
+                    <div class="property-actions">
+                        <button class="btn-small btn-view" onclick="viewProperty(${index})">View</button>
+                        <button class="btn-small btn-delete" onclick="deleteProperty(${index})">Delete</button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Add property to the list
+        function addProperty(propertyData) {
+            properties.push(propertyData);
+            renderProperties();
+            updatePropertyCount();
+            toggleEmptyState();
+        }
+
+        // Render all properties
+        function renderProperties() {
+            const propertiesList = document.getElementById('properties-list');
+            propertiesList.innerHTML = '';
+
+            properties.forEach((property, index) => {
+                const card = createPropertyCard(property, index);
+                propertiesList.appendChild(card);
+            });
+        }
+
+        // View property (placeholder for future functionality)
+        function viewProperty(index) {
+            const property = properties[index];
+            alert('View property details:\n\n' + property.address + '\n\n(Full details functionality coming soon)');
+        }
+
+        // Delete property
+        function deleteProperty(index) {
+            if (confirm('Are you sure you want to delete this property?')) {
+                properties.splice(index, 1);
+                renderProperties();
+                updatePropertyCount();
+                toggleEmptyState();
+            }
+        }
+
+        // Handle form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('add-property-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const addressInput = document.getElementById('address');
+
+                // Get the address from selectedPlace or hidden input
+                let address = '';
+                if (selectedPlace && selectedPlace.formattedAddress) {
+                    address = selectedPlace.formattedAddress;
+                } else if (addressInput.value) {
+                    address = addressInput.value;
+                }
+
+                if (!address || address.trim() === '') {
+                    alert('Please enter a property address');
+                    return;
+                }
+
+                // Create property object
+                let propertyData;
+                if (selectedPlace && selectedPlace.formattedAddress) {
+                    // Use autocomplete data
+                    propertyData = {
+                        address: selectedPlace.formattedAddress,
+                        city: selectedPlace.parsedAddress.city,
+                        state: selectedPlace.parsedAddress.state,
+                        zipCode: selectedPlace.parsedAddress.zipCode,
+                        lat: selectedPlace.location.lat,
+                        lng: selectedPlace.location.lng,
+                        fullData: selectedPlace
+                    };
+                } else {
+                    // Use manual entry
+                    propertyData = {
+                        address: address,
+                        city: '',
+                        state: '',
+                        zipCode: '',
+                        lat: null,
+                        lng: null
+                    };
+                }
+
+                // Add property to the list
+                addProperty(propertyData);
+
+                // Clear the form
+                addressInput.value = '';
+                selectedPlace = null;
+            });
+        });
+
+        // Error handling for API load failure
+        window.gm_authFailure = function() {
+            console.error('Google Maps API authentication failed. Please check your API key.');
+            alert('Address autocomplete is temporarily unavailable. You can still enter addresses manually.');
+        };
+    </script>
 </body>
 </html>
