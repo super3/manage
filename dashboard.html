@@ -168,9 +168,33 @@
             color: #1a1a1a;
         }
 
+        .mockup-header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .mockup-header span {
             font-size: 0.9rem;
             color: #999;
+        }
+
+        .btn-add-header {
+            background: #3171ef;
+            color: white;
+            padding: 0.6rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-add-header:hover {
+            background: #2560d9;
+            transform: translateY(-1px);
         }
 
         .stats-row {
@@ -235,6 +259,43 @@
 
         .properties-list.active {
             display: block;
+        }
+
+        .add-another-section {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f0f4ff 0%, #f8f9ff 100%);
+            border-radius: 12px;
+            border: 2px solid #e0e7ff;
+        }
+
+        .add-another-form {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .btn-show-form {
+            background: #f0f4ff;
+            color: #3171ef;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-block;
+            transition: all 0.2s;
+            border: 2px solid #d1d9ff;
+            cursor: pointer;
+        }
+
+        .btn-show-form:hover {
+            background: #e0e7ff;
+            border-color: #3171ef;
+        }
+
+        .hidden {
+            display: none;
         }
 
         .property-card {
@@ -374,7 +435,19 @@
             .mockup-header {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .mockup-header-right {
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 0.5rem;
+                width: 100%;
+            }
+
+            .btn-add-header {
+                width: 100%;
+                text-align: center;
             }
 
             .stats-row {
@@ -410,6 +483,15 @@
             .add-property-form {
                 flex-direction: column;
             }
+
+            .add-another-form {
+                flex-direction: column;
+            }
+
+            .btn-show-form {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxdYMdPwYKYGtjb5Bw8QhEbk6gKZkG0vM&libraries=places&loading=async&callback=initAutocomplete" async defer></script>
@@ -431,7 +513,10 @@
         <div class="dashboard-mockup">
             <div class="mockup-header">
                 <h2>My Properties</h2>
-                <span>0 Properties</span>
+                <div class="mockup-header-right">
+                    <span id="property-count">0 Properties</span>
+                    <button class="btn-add-header hidden" id="add-property-btn" onclick="showAddPropertyForm()">+ Add Property</button>
+                </div>
             </div>
 
             <div class="stats-row">
@@ -447,6 +532,19 @@
                     <label>Net Income</label>
                     <div class="value">$0</div>
                 </div>
+            </div>
+
+            <div class="add-another-section hidden" id="add-another-section">
+                <form class="add-another-form" id="add-another-property-form">
+                    <input
+                        type="text"
+                        id="address-another"
+                        placeholder="Enter property address"
+                        class="address-input"
+                    />
+                    <button type="submit" class="btn-primary">Add Property</button>
+                    <button type="button" class="btn-show-form" onclick="hideAddPropertyForm()">Cancel</button>
+                </form>
             </div>
 
             <div class="properties-list" id="properties-list">
@@ -473,6 +571,8 @@
     <script>
         let autocompleteWidget;
         let selectedPlace = null;
+        let autocompleteWidgetAnother;
+        let selectedPlaceAnother = null;
 
         // Initialize autocomplete when Google Maps API loads
         async function initAutocomplete() {
@@ -545,14 +645,117 @@
             }
         }
 
+        // Initialize autocomplete for "add another" form
+        async function initAutocompleteAnother() {
+            try {
+                const { PlaceAutocompleteElement } = await google.maps.importLibrary("places");
+
+                const input = document.getElementById('address-another');
+
+                // Create the new PlaceAutocompleteElement
+                autocompleteWidgetAnother = new PlaceAutocompleteElement({
+                    componentRestrictions: { country: [] },
+                });
+
+                // Replace the input with autocomplete widget
+                input.parentNode.insertBefore(autocompleteWidgetAnother, input);
+                input.style.display = 'none';
+
+                // Style the autocomplete widget container
+                autocompleteWidgetAnother.style.flex = '1';
+
+                // Listen for place selection
+                autocompleteWidgetAnother.addEventListener('gmp-select', async ({ placePrediction }) => {
+                    if (!placePrediction) {
+                        return;
+                    }
+
+                    // Convert prediction to place
+                    const place = placePrediction.toPlace();
+
+                    // Fetch full place details
+                    await place.fetchFields({
+                        fields: ['addressComponents', 'formattedAddress', 'location']
+                    });
+
+                    // Store the selected place data
+                    selectedPlaceAnother = {
+                        formattedAddress: place.formattedAddress,
+                        addressComponents: place.addressComponents,
+                        location: {
+                            lat: place.location.lat(),
+                            lng: place.location.lng()
+                        }
+                    };
+
+                    // Extract specific address components for future use
+                    const components = {};
+                    if (place.addressComponents) {
+                        place.addressComponents.forEach(component => {
+                            const type = component.types[0];
+                            components[type] = component.longText;
+                        });
+                    }
+
+                    selectedPlaceAnother.parsedAddress = {
+                        streetNumber: components.street_number || '',
+                        street: components.route || '',
+                        city: components.locality || components.sublocality || '',
+                        state: components.administrative_area_level_1 || '',
+                        zipCode: components.postal_code || '',
+                        country: components.country || ''
+                    };
+
+                    // Update hidden input for form submission
+                    input.value = place.formattedAddress;
+                });
+
+            } catch (error) {
+                console.error('Error initializing Google Maps Autocomplete for add another form:', error);
+            }
+        }
+
+        // Show add property form
+        function showAddPropertyForm() {
+            const section = document.getElementById('add-another-section');
+            section.classList.remove('hidden');
+
+            // Initialize autocomplete if not already initialized
+            if (!autocompleteWidgetAnother) {
+                initAutocompleteAnother();
+            }
+        }
+
+        // Hide add property form
+        function hideAddPropertyForm() {
+            const section = document.getElementById('add-another-section');
+            section.classList.add('hidden');
+
+            // Clear the form
+            const input = document.getElementById('address-another');
+            input.value = '';
+            if (autocompleteWidgetAnother) {
+                autocompleteWidgetAnother.value = '';
+            }
+            selectedPlaceAnother = null;
+        }
+
         // Properties storage
         let properties = [];
 
         // Update property count
         function updatePropertyCount() {
-            const countElement = document.querySelector('.mockup-header span');
+            const countElement = document.getElementById('property-count');
+            const addButton = document.getElementById('add-property-btn');
             const count = properties.length;
             countElement.textContent = count === 1 ? '1 Property' : `${count} Properties`;
+
+            // Show the add button when there are properties
+            if (count > 0) {
+                addButton.classList.remove('hidden');
+            } else {
+                addButton.classList.add('hidden');
+            }
         }
 
         // Toggle between empty state and properties list
@@ -677,6 +880,58 @@
                 // Clear the form
                 addressInput.value = '';
                 selectedPlace = null;
+            });
+
+            // Handle "add another property" form submission
+            const formAnother = document.getElementById('add-another-property-form');
+            formAnother.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const addressInput = document.getElementById('address-another');
+
+                // Get the address from selectedPlaceAnother or hidden input
+                let address = '';
+                if (selectedPlaceAnother && selectedPlaceAnother.formattedAddress) {
+                    address = selectedPlaceAnother.formattedAddress;
+                } else if (addressInput.value) {
+                    address = addressInput.value;
+                }
+
+                if (!address || address.trim() === '') {
+                    alert('Please enter a property address');
+                    return;
+                }
+
+                // Create property object
+                let propertyData;
+                if (selectedPlaceAnother && selectedPlaceAnother.formattedAddress) {
+                    // Use autocomplete data
+                    propertyData = {
+                        address: selectedPlaceAnother.formattedAddress,
+                        city: selectedPlaceAnother.parsedAddress.city,
+                        state: selectedPlaceAnother.parsedAddress.state,
+                        zipCode: selectedPlaceAnother.parsedAddress.zipCode,
+                        lat: selectedPlaceAnother.location.lat,
+                        lng: selectedPlaceAnother.location.lng,
+                        fullData: selectedPlaceAnother
+                    };
+                } else {
+                    // Use manual entry
+                    propertyData = {
+                        address: address,
+                        city: '',
+                        state: '',
+                        zipCode: '',
+                        lat: null,
+                        lng: null
+                    };
+                }
+
+                // Add property to the list
+                addProperty(propertyData);
+
+                // Hide the form and clear it
+                hideAddPropertyForm();
             });
         });
 
